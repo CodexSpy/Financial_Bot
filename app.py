@@ -98,17 +98,14 @@ if st.session_state.vector_store_ready:
              st.markdown(msg["content"], unsafe_allow_html=True)
     
     if user_input := st.chat_input("Ask a question"):
-        user_input_prefixed = "Please respond only in English and with proper spacing: " + user_input # can be removed too but it ensures proper response
+        user_input_prefixed = "Please respond only in English and with proper spacing" + user_input # can be removed too but it ensures proper response
         st.session_state.messages.append({"role": "user", "content": user_input})
         
         with st.chat_message("user"):
             st.markdown(user_input)
         
         with st.chat_message('assistant'):
-           
-            with st.spinner('Getting results...'):
-                time.sleep(5)
-            
+     
             def stream_bot_response():
                 response_tokens = []
                 try:
@@ -121,8 +118,11 @@ if st.session_state.vector_store_ready:
                     error_msg = f"Error: {str(e)}"
                     st.session_state.messages.append({"role": "assistant", "content": error_msg})
                     yield error_msg
-            
-            st.write_stream(stream_bot_response)
+
+            answer = stream_bot_response()  
+            with st.spinner('Getting results...'):
+             time.sleep(2)
+             st.write_stream(answer)
 
 else:
     st.info("Please upload a document to start chatting.")
