@@ -12,6 +12,8 @@
 -   🗂️ **Vector Search**: Efficient document search using embeddings
 -   🔄 **Chat Reset**: Clear conversation history and uploaded documents
 
+[![Live Demo](./assets/botSS.png)](https://expensyzer.streamlit.app/)
+
 #### Prerequisites
 
 -   Python 3.8 or higher
